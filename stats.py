@@ -1,10 +1,9 @@
-def count_words(content):
+def get_num_words(content):
     split_content = content.split()
-    num_words = len(split_content)
-    print("----------- Word Count ----------")
-    print(f"Found {num_words} total words")
+    return len(split_content)
 
-def count_chars(content):
+
+def get_chars_dict(content):
     content_lowercase = content.lower()
     counter = {}
 
@@ -13,11 +12,15 @@ def count_chars(content):
             counter[char] += 1
         else:
             counter[char] = 1
-    print("--------- Character Count -------")
-    print_sorted_list(counter)
 
-def print_sorted_list(dictionary):
-    sorted_dict = sorted(dictionary.items(), key=lambda x:x[1], reverse=True)
-    for dict in sorted_dict:
-        if dict[0].isalpha():
-            print(f"{dict[0]}: {dict[1]}")        
+    return counter
+
+
+def chars_dict_to_sorted_list(counter):
+    chars_list = []
+
+    for char, num in counter.items():
+        chars_list.append({"char": char, "num": num})
+
+    chars_list.sort(key=lambda item: item["num"], reverse=True)
+    return chars_list
